@@ -243,6 +243,7 @@ export function StationMap({
           scrollWheelZoom={false}
           className="h-full w-full"
         >
+          {/* @ts-ignore - 'attribution' is a valid Leaflet tile layer option but missing in react-leaflet's TS types */}
           <TileLayer
             attribution='&copy; <a href="https://www.openstreetmap.org/">OpenStreetMap</a> contributors'
             url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
