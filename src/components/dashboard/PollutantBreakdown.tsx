@@ -125,7 +125,12 @@ export function PollutantBreakdown({
               'so2',
               'co',
               'o3',
-            ].map((k) => ({ key: k as PollutantKey, label: k.toUpperCase(), unit: '' }))
+            ].map((k) => ({
+              key: k as PollutantKey,
+              label: k.toUpperCase(),
+              unit: '',
+              value: null,
+            }))
           : pollutants
         ).map((p) => (
           <div
