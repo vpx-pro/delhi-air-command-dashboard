@@ -1,8 +1,9 @@
 @import "tailwindcss";
+@import "leaflet/dist/leaflet.css";
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --background: #020617;
+  --foreground: #e5e7eb;
 }
 
 @theme inline {
@@ -12,15 +13,50 @@
   --font-mono: var(--font-geist-mono);
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+body {
+  background: radial-gradient(circle at top, #0f172a 0, #020617 55%);
+  color: var(--foreground);
+  font-family: var(--font-geist-sans), system-ui, -apple-system, BlinkMacSystemFont,
+    "Segoe UI", sans-serif;
 }
 
-body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+.glass-panel {
+  @apply rounded-2xl border border-white/10 bg-slate-900/60 shadow-xl shadow-black/30 backdrop-blur;
 }
+
+.page-grid {
+  @apply mx-auto flex min-h-screen max-w-7xl flex-col gap-8 px-4 py-8 md:px-8 lg:px-10;
+}
+
+.page-grid-main {
+  @apply grid gap-6 lg:grid-cols-[2fr,1.5fr];
+}
+
+.section-title {
+  @apply text-sm font-semibold uppercase tracking-[0.2em] text-sky-300;
+}
+
+.pill {
+  @apply inline-flex items-center gap-1 rounded-full bg-slate-900/80 px-3 py-1 text-xs font-medium text-slate-200 ring-1 ring-slate-700/60;
+}
+
+.badge-aqi-good {
+  @apply rounded-full bg-emerald-500/20 px-2 py-0.5 text-xs font-semibold text-emerald-300;
+}
+
+.badge-aqi-moderate {
+  @apply rounded-full bg-yellow-500/20 px-2 py-0.5 text-xs font-semibold text-yellow-300;
+}
+
+.badge-aqi-poor {
+  @apply rounded-full bg-orange-500/20 px-2 py-0.5 text-xs font-semibold text-orange-300;
+}
+
+.badge-aqi-very-poor {
+  @apply rounded-full bg-red-500/20 px-2 py-0.5 text-xs font-semibold text-red-300;
+}
+
+.badge-aqi-hazardous {
+  @apply rounded-full bg-fuchsia-600/20 px-2 py-0.5 text-xs font-semibold text-fuchsia-200;
+}
+
