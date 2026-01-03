@@ -205,10 +205,16 @@ export function CorrelationChart({ filters }: { filters: CorrelationFilters }) {
                   ?.date;
                 return point ? `Date: ${point}` : String(label);
               }}
-              formatter={(value: number, name: string) => {
-                if (name === 'pm25') return [`${value} µg/m³`, 'PM2.5'];
-                if (name === 'fireCount') return [value, 'Fire hotspots'];
-                return [value, name];
+              formatter={(value, name) => {
+                const num =
+                  typeof value === 'number'
+                    ? value
+                    : value != null
+                      ? Number(value)
+                      : 0;
+                if (name === 'pm25') return [`${num} µg/m³`, 'PM2.5'];
+                if (name === 'fireCount') return [String(num), 'Fire hotspots'];
+                return [String(num), String(name)];
               }}
             />
             <Scatter data={data} fill="#f97316" />
