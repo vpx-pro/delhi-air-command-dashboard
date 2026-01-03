@@ -8,7 +8,7 @@ import { ENV } from '@/config/env';
 const MapContainer = dynamic(
   async () => (await import('react-leaflet')).MapContainer,
   { ssr: false },
-);
+) as any;
 const TileLayer = dynamic(async () => (await import('react-leaflet')).TileLayer, {
   ssr: false,
 });
