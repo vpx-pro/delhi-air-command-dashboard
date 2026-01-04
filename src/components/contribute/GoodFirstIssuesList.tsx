@@ -76,7 +76,7 @@ export function GoodFirstIssuesList() {
 
       if (data && data.length) {
         setIssues(
-          data.map((row) => ({
+          (data as any[]).map((row: any) => ({
             id: row.id,
             slug: row.slug,
             title: row.title,
