@@ -9,16 +9,18 @@ const MapContainer = dynamic(
   async () => (await import('react-leaflet')).MapContainer,
   { ssr: false },
 ) as any;
-const TileLayer = dynamic(async () => (await import('react-leaflet')).TileLayer, {
-  ssr: false,
-});
+const TileLayer = dynamic(
+  async () => (await import('react-leaflet')).TileLayer,
+  { ssr: false },
+) as any;
 const CircleMarker = dynamic(
   async () => (await import('react-leaflet')).CircleMarker,
   { ssr: false },
-);
-const Tooltip = dynamic(async () => (await import('react-leaflet')).Tooltip, {
-  ssr: false,
-});
+) as any;
+const Tooltip = dynamic(
+  async () => (await import('react-leaflet')).Tooltip,
+  { ssr: false },
+) as any;
 
 type Station = {
   id: string;
@@ -243,10 +245,12 @@ export function StationMap({
           scrollWheelZoom={false}
           className="h-full w-full"
         >
-          {/* @ts-ignore - 'attribution' is a valid Leaflet tile layer option but missing in react-leaflet's TS types */}
           <TileLayer
-            attribution='&copy; <a href="https://www.openstreetmap.org/">OpenStreetMap</a> contributors'
-            url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
+            {...({
+              attribution:
+                '&copy; <a href="https://www.openstreetmap.org/">OpenStreetMap</a> contributors',
+              url: 'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',
+            } as any)}
           />
           {stations.map((s) => {
             const reading = readings[s.id];

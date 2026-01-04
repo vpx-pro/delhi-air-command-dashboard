@@ -113,8 +113,11 @@ export function ViirsFiresMap() {
           className="h-full w-full"
         >
           <TileLayer
-            attribution='&copy; <a href="https://www.openstreetmap.org/">OpenStreetMap</a> contributors'
-            url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
+            {...({
+              attribution:
+                '&copy; <a href="https://www.openstreetmap.org/">OpenStreetMap</a> contributors',
+              url: 'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',
+            } as any)}
           />
           {fires.map((f, idx) => (
             <CircleMarker
