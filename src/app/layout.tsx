@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
+import { MainNav } from "@/components/layout/MainNav";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -14,17 +15,10 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Delhi Pollution Crisis Dashboard",
+  title: "Delhi Pollution Dashboard – Overview, Understand, Decide, Build",
   description:
-    "Open-source dashboard tracking Delhi’s air quality, fires, and weather with Supabase + Next.js.",
+    "Open-source Delhi air quality dashboard to help the public, researchers, policymakers, and builders understand and act on pollution.",
 };
-
-const navItems = [
-  { href: "/", label: "Dashboard" },
-  { href: "/explore", label: "Explore" },
-  { href: "/data-sources", label: "Data Sources" },
-  { href: "/contribute", label: "Contribute" },
-];
 
 export default function RootLayout({
   children,
@@ -54,17 +48,7 @@ export default function RootLayout({
                   </span>
                 </div>
               </Link>
-              <nav className="flex items-center gap-1 rounded-full border border-white/10 bg-slate-900/80 px-1 py-1 text-xs font-medium text-slate-200 shadow-lg shadow-black/40">
-                {navItems.map((item) => (
-                  <Link
-                    key={item.href}
-                    href={item.href}
-                    className="rounded-full px-3 py-1.5 text-[11px] tracking-wide text-slate-200 hover:bg-slate-800/90 hover:text-sky-300"
-                  >
-                    {item.label}
-                  </Link>
-                ))}
-              </nav>
+              <MainNav />
             </div>
           </header>
           <main>{children}</main>

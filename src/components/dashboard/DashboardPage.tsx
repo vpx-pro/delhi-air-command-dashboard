@@ -6,6 +6,8 @@ import { AqiTimelineChart } from './AqiTimelineChart';
 import { StationMap } from './StationMap';
 import { SignupForm } from './SignupForm';
 import { PollutantBreakdown } from './PollutantBreakdown';
+import { AudienceSelector } from '@/components/common/AudienceSelector';
+import { WhyTodayPanel } from './WhyTodayPanel';
 
 type SourceKey = 'air' | 'fires';
 
@@ -43,17 +45,20 @@ export default function DashboardPage() {
   const showAir = enabledSources.air;
   const showFires = enabledSources.fires;
 
+  const [latestObservedAt, setLatestObservedAt] = useState<string | null>(null);
+
   return (
     <div className="page-grid">
       <div className="flex flex-col gap-4 md:flex-row md:items-center md:justify-between">
         <div>
-          <p className="section-title mb-1">Delhi · NCR</p>
+          <p className="section-title mb-1">Overview · Delhi · NCR</p>
           <h1 className="text-2xl font-semibold tracking-tight text-slate-50 md:text-3xl">
-            Delhi Pollution Crisis Dashboard
+            Today&apos;s air in Delhi, at a glance
           </h1>
           <p className="mt-2 max-w-xl text-sm text-slate-300">
-            A community-maintained view of Delhi&apos;s air quality and nearby open-fire
-            hotspots, backed by Supabase so you can extend the data and analysis.
+            A calm, public-facing view of current air quality and nearby fire hotspots. Deeper
+            analysis lives under <span className="font-semibold">Understand</span> and{' '}
+            <span className="font-semibold">Decide</span>.
           </p>
         </div>
         <div className="flex flex-col items-start gap-2 text-xs text-slate-300 md:items-end">
@@ -67,6 +72,9 @@ export default function DashboardPage() {
           </p>
         </div>
       </div>
+
+      <AudienceSelector context="overview" />
+      <WhyTodayPanel lastUpdatedIso={latestObservedAt} />
 
       <section className="glass-panel flex flex-wrap items-center justify-between gap-3 p-4 text-xs text-slate-100">
         <div className="flex items-center gap-2">
@@ -129,6 +137,7 @@ export default function DashboardPage() {
                 <AqiSummaryCard
                   selectedStationId={selectedStation?.id ?? null}
                   selectedStationName={selectedStation?.name ?? null}
+                  onLatestObservedAt={setLatestObservedAt}
                 />
                 <PollutantBreakdown selectedStationId={selectedStation?.id ?? null} />
               </div>

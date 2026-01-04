@@ -9,22 +9,16 @@ const MapContainer = dynamic(
   async () => (await import('react-leaflet')).MapContainer,
   { ssr: false },
 ) as any;
-const TileLayer = dynamic(
-  async () => (await import('react-leaflet')).TileLayer,
-  {
-    ssr: false,
-  },
-) as any;
+const TileLayer = dynamic(async () => (await import('react-leaflet')).TileLayer, {
+  ssr: false,
+});
 const CircleMarker = dynamic(
   async () => (await import('react-leaflet')).CircleMarker,
   { ssr: false },
-) as any;
-const Tooltip = dynamic(
-  async () => (await import('react-leaflet')).Tooltip,
-  {
-    ssr: false,
-  },
-) as any;
+);
+const Tooltip = dynamic(async () => (await import('react-leaflet')).Tooltip, {
+  ssr: false,
+});
 
 type Station = {
   id: string;

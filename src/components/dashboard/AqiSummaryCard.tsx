@@ -48,9 +48,11 @@ function parseWaqiPayload(json: any): AqiSummary | null {
 export function AqiSummaryCard({
   selectedStationId,
   selectedStationName,
+  onLatestObservedAt,
 }: {
   selectedStationId: string | null;
   selectedStationName: string | null;
+  onLatestObservedAt?: (ts: string | null) => void;
 }) {
   const [summary, setSummary] = useState<AqiSummary | null>(null);
   const [loading, setLoading] = useState(true);
@@ -80,12 +82,15 @@ export function AqiSummaryCard({
           throw new Error('Unexpected AQI payload shape');
         }
 
-      if (!isMounted) return;
+        if (!isMounted) return;
 
-        setSummary({
+        const nextSummary: AqiSummary = {
           ...parsed,
           stationName: selectedStationName ?? parsed.stationName,
-        });
+        };
+
+        setSummary(nextSummary);
+        onLatestObservedAt?.(nextSummary.observed_at);
       } catch (e) {
         const msg = e instanceof Error ? e.message : 'Unknown error';
         setError(msg);
@@ -100,7 +105,7 @@ export function AqiSummaryCard({
       isMounted = false;
       window.clearInterval(id);
     };
-  }, [selectedStationId, selectedStationName]);
+  }, [selectedStationId, selectedStationName, onLatestObservedAt]);
 
   const aqi = summary?.aqi ?? null;
   const category = getAqiCategory(aqi);
